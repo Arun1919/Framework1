@@ -10,16 +10,16 @@ import java.io.IOException;
 
 public class ExcelUtils {
 
-    private static XSSFSheet ExcelWSheet;
-    private static XSSFWorkbook ExcelWBook;
-    private static XSSFCell Cell;
-    private static XSSFRow Row;
+    private static XSSFSheet excelWSheet;
+    private static XSSFWorkbook excelWBook;
+    private static XSSFCell cell;
+    private static XSSFRow row;
 
-    public static void setExcelFile(String Path,String SheetName) throws Exception {
+    public static void setExcelFile(String path,String sheetName) throws Exception {
         try {
-            FileInputStream ExcelFile = new FileInputStream(Path);
-            ExcelWBook = new XSSFWorkbook(ExcelFile);
-            ExcelWSheet = ExcelWBook.getSheet(SheetName);
+            FileInputStream excelFile = new FileInputStream(path);
+            excelWBook = new XSSFWorkbook(ExcelFile);
+            excelWSheet = excelWBook.getSheet(sheetName);
 
             }
         catch (Exception e) {
@@ -27,12 +27,12 @@ public class ExcelUtils {
             }
     }
 
-     public static String getCellData(int RowNum,int ColNum) throws Exception {
+     public static String getCellData(int rowNum,int colNum) throws Exception {
 
          try {
-             Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
-             String CellData = Cell.getStringCellValue();
-             return CellData;
+             cell = excelWSheet.getRow(rowNum).getCell(colNum);
+             String cellData = cell.getStringCellValue();
+             return cellData;
 
          } catch (Exception e) {
              throw (e);
@@ -41,16 +41,16 @@ public class ExcelUtils {
 
      }
     //To write in the Excel Cell
-     public static void setCellData(String Result, int RowNum, int ColNum) throws Exception {
+     public static void setCellData(String result, int rowNum, int colNum) throws Exception {
 
          try {
-             Row = ExcelWSheet.getRow(RowNum);
-             Cell = Row.getCell(ColNum, Row.RETURN_BLANK_AS_NULL);
-             if (Cell == null) {
-                 Cell = Row.createCell(ColNum);
-                 Cell.setCellValue(Result);
+             row = excelWSheet.getRow(rowNum);
+             cell = row.getCell(colNum, Row.RETURN_BLANK_AS_NULL);
+             if (cell == null) {
+                 cell = row.createCell(colNum);
+                 cell.setCellValue(result);
              } else {
-                 Cell.setCellValue(Result);
+                 Cell.setCellValue(result);
              }
 
              FileOutputStream fileOut = new FileOutputStream(Constants.Path_TestData + Constants.File_TestData);
